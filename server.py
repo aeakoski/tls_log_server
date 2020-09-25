@@ -1,9 +1,13 @@
 import socket, ssl
 
-HOST, PORT, CERT = '127.0.0.1', 8445, './cert.pem'
+HOST, PORT, CERT = '127.0.0.1', 8449, './cert.pem'
 
 def handle(conn):
   print(conn.recv())
+  with open("tls.log", "a") as fd:
+      fd.write(conn.recv())
+      fd.write("\r\n")
+
   conn.write(b'HTTP/1.1 200 OK\n\n%s' % conn.getpeername()[0].encode())
 
 def main():
@@ -15,6 +19,7 @@ def main():
     context.load_cert_chain('cert.pem', 'key.pem')
     #context.options |= ssl.OP_NO_TLSv1 | ssl.OP_NO_TLSv1_1  # optional
     context.set_ciphers("ALL")
+    print("Listening...")
     while True:
         conn = None
         ssock, addr = sock.accept()
@@ -28,3 +33,4 @@ def main():
             conn.close()
 if __name__ == '__main__':
   main()
+  print("Exiting...")
