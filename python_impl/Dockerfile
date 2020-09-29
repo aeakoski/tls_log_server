@@ -5,8 +5,4 @@ COPY cert.pem .
 COPY key.pem .
 COPY tls.log .
 
-EXPOSE 8443
-EXPOSE 8449
-
-
-CMD [ "python", "server.py" ]
+CMD [ "python3", "server.py" ]

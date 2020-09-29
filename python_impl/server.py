@@ -18,7 +18,7 @@ def main():
     #context.load_cert_chain(certfile=CERT)  # 1. key, 2. cert, 3. intermediates
     context.load_cert_chain('cert.pem', 'key.pem')
     #context.options |= ssl.OP_NO_TLSv1 | ssl.OP_NO_TLSv1_1  # optional
-    context.set_ciphers("ALL")
+    context.set_ciphers("PSK-AES128-CBC-SHA")
     print("Listening...")
     while True:
         conn = None
