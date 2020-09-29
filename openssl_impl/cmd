@@ -1,0 +1,1 @@
+openssl s_server -accept 8886 -cert public-cert.pem -key private-key.pem -debug
